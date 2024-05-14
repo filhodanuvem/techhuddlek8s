@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: overload
+  labels:
+    app: overload
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: overload
+  template:
+    metadata:
+      labels:
+        app: overload
+    spec:
+      containers:
+      - name: overload
+        image: cloudson/overload:v10
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            memory: "150Mi"
+            cpu: 1
+          requests:
+            memory: "100Mi"
+            cpu: 1
